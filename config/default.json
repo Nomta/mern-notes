@@ -1,0 +1,6 @@
+{
+    "port": 7000,
+    "mongodb": {
+        "uri": "mongodb://localhost/app" 
+    }
+}
