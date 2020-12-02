@@ -1,5 +1,6 @@
 {
     "port": 7000,
+    "jwtSecret": "secret",
     "mongodb": {
         "uri": "mongodb://localhost/app" 
     }
