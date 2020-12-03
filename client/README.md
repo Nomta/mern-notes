@@ -1,1 +1,0 @@
-Navbar to routes or to App if isAuth instead Logout in routes
