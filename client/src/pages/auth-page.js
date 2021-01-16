@@ -1,5 +1,5 @@
 import { useState, useContext, useCallback } from "react";
-import { useAuthApi } from "../hooks/authApi.hook";
+import { usePostData } from "../hooks/postData.hook";
 import { AuthContext } from "../context/AuthContext";
 
 const AuthPage = () => {
@@ -10,7 +10,7 @@ const AuthPage = () => {
         password: ""
     });
     const setLoadingStatus = (status) => setLoading(status);
-    const postData = useAuthApi(formData, setLoadingStatus);
+    const postData = usePostData(formData, setLoadingStatus);
 
     const login = useCallback(
         ({ token, userId }) => {
@@ -26,12 +26,12 @@ const AuthPage = () => {
         });
     };
 
-    const authHandler = postData("/api/auth");
-    const loginHandler = postData("/api/auth/login", login);
+    const authHandler = postData("/auth");
+    const loginHandler = postData("/auth/login", login);
 
     return (
         <div className="row">
-            <div className="col s6 offset s3">
+            <div className="col s6 offset-s3">
                 <h1>Auth Page</h1>
             </div>
 
