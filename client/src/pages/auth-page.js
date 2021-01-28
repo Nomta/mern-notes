@@ -30,31 +30,29 @@ const AuthPage = () => {
     const loginHandler = postData("/auth/login", login);
 
     return (
-        <div className="row">
-            <div className="col s6 offset-s3">
-                <h1>Auth Page</h1>
-            </div>
-
-            <div className="card blue-grey darken-3">
-                <div className="card-content white-text">
-                    <h2 className="card-title">Card Title</h2>
-                    <div className="input-field">
-                        <input name="email" type="text" onChange={changeHandler} />
-                        <label htmlFor="email">Email</label>
+        <div className="auth-card grey lighten-2" style={{ height: "100%" }}>
+            <div className="container">
+                <div className="card white">
+                    <div className="card-content">
+                        <h2 className="card-title">Login</h2>
+                        <div className="input-field">
+                            <input name="email" type="text" onChange={changeHandler} />
+                            <label htmlFor="email">Email</label>
+                        </div>
+                        <div className="input-field">
+                            <input name="password" type="password" onChange={changeHandler} />
+                            <label htmlFor="password">Password</label>
+                        </div>
                     </div>
-                    <div className="input-field">
-                        <input name="password" type="password" onChange={changeHandler} />
-                        <label htmlFor="password">Password</label>
+                    <div className="card-action right-align">
+                        <button className="btn" disabled={loading} onClick={loginHandler}>
+                            Login
+                        </button>
+                        &nbsp;
+                        <button className="btn" disabled={loading} onClick={authHandler}>
+                            Auth
+                        </button>
                     </div>
-                </div>
-                <div className="card-action right-align">
-                    <button className="btn" disabled={loading} onClick={loginHandler}>
-                        Login
-                    </button>
-                    &nbsp;
-                    <button className="btn" disabled={loading} onClick={authHandler}>
-                        Auth
-                    </button>
                 </div>
             </div>
         </div>
