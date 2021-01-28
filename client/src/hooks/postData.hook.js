@@ -14,6 +14,7 @@ export const usePostData = (formData, setLoadingStatus) => {
                 const data = await request(url, "POST", formData, headers);
                 setLoadingStatus(false);
                 (cb || showMessage)(data);
+                return data;
             } catch (err) {
                 setLoadingStatus(false);
                 showMessage(err);
