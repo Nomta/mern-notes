@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 
 module.exports = async function (req, res) {
     try {
-        console.log("AUTH POST");
         const { email, password } = req.body;
         const exist = await User.findOne({ email });
 
