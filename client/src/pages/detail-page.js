@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/AuthContext";
 import Note from "../components/Note";
-// import { Loader } from "../components/Loader";
+import Loader from "../components/Loader";
 
 const DetailPage = () => {
     const [note, setNote] = useState({});
@@ -15,20 +15,22 @@ const DetailPage = () => {
 
     const getNote = useCallback(async () => {
         try {
+            setLoading(true);
             const note = await request(`/notes/${id}`, "GET", null, headers);
             setNote(note);
-        } catch (err) {}
+        } catch (err) {
+        } finally {
+            setLoading(false);
+        }
     }, [token, request, id]);
 
     useEffect(() => getNote(), [getNote]);
 
-    return (
-        <div>
-            <h1>Detail Page</h1>
-            {/* {loading ? <Loader/> : note && <Note note={note}/>} */}
-            <Note note={note} />
-        </div>
-    );
+    if (loading) {
+        return <Loader />;
+    }
+
+    return <Note note={note} />;
 };
 
 export default DetailPage;

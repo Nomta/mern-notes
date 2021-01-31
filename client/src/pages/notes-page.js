@@ -4,7 +4,7 @@ import { usePostData } from "../hooks/postData.hook";
 import { AuthContext } from "../context/AuthContext";
 import { useHttp } from "../hooks/http.hook";
 import NoteList from "../components/NoteList";
-// import Loader from "../components/Loader"
+import Loader from "../components/Loader";
 
 const LinksPage = () => {
     const [notes, setNotes] = useState([]);
@@ -15,16 +15,24 @@ const LinksPage = () => {
 
     const getNotes = useCallback(async () => {
         try {
+            setLoading(true);
             const notes = await request("/notes", "GET", null, headers);
             setNotes(notes);
-        } catch (err) {}
+        } catch (err) {
+        } finally {
+            setLoading(false);
+        }
     }, [token, request]);
 
     useEffect(() => getNotes(), [getNotes]);
+
+    if (loading) {
+        return <Loader />;
+    }
+
     return (
         <div>
             <h1>Notes Page</h1>
-            {/* {loading ? <Loader/> : notes && <NoteList notes={notes}/>} */}
             <NoteList notes={notes} />
         </div>
     );

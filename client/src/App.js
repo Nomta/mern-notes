@@ -2,6 +2,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { useRoutes } from "./routes";
 import { AuthContext } from "./context/AuthContext";
 import { useAuth } from "./hooks/auth.hook";
+import Stub from "./components/Stub";
 import "materialize-css";
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
 
     return (
         <AuthContext.Provider value={{ ...authContextData, isAuth }}>
-            <Router>{routes}</Router>
+            <Router> {authContextData.ready ? routes : <Stub />} </Router>
         </AuthContext.Provider>
     );
 }
