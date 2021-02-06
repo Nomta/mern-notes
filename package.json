@@ -1,7 +1,7 @@
 {
     "name": "mern-notes",
     "version": "1.0.0",
-    "description": "mern",
+    "description": "Notes app with React.js, Express.js, MongoDB",
     "main": "index.js",
     "scripts": {
         "build": "cross-env NODE_ENV=production node index.js",
