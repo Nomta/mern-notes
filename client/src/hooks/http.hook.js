@@ -1,28 +1,28 @@
-import {useCallback} from 'react'
+import { useCallback } from "react";
+import HttpError from "../error/HttpError";
 
 export const useHttp = () => {
-
-    const request = useCallback(async(url, method = 'GET', body = null, headers = {}) => {
-        
+    const request = useCallback(async (url, method = "GET", body = null, headers = {}) => {
         try {
             if (body) {
-                body = JSON.stringify(body)
-                headers['Content-Type'] = 'application/json'
+                body = JSON.stringify(body);
+                headers["Content-Type"] = "application/json";
             }
-            const response = await fetch(url, {method, body, headers})
-            const data = await response.json()
+
+            const response = await fetch(url, { method, body, headers });
 
             if (!response.ok) {
-                throw new Error(data.message || 'Unknown error')
+                throw new HttpError(response.status, data.message || "Unknown error");
             }
 
-            data.message = data.message|| 'ok'
-            return data
-        }
-        catch(err) {
-            throw err
-        }
-    }, [])
+            const data = await response.json();
 
-    return request
-}
+            data.message = data.message || "ok";
+            return data;
+        } catch (err) {
+            throw err;
+        }
+    }, []);
+
+    return request;
+};

@@ -11,15 +11,20 @@ const CreatePage = () => {
 
     const setLoadingStatus = (status) => setLoading(status);
     const postData = usePostData(formData, setLoadingStatus);
-    // const redirect = () => history.push('/notes');
     const headers = { Authorization: `Bearer ${auchContext.token}` };
 
     // const submitHandler = postData("/notes/create", null, headers);
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        const note = await postData("/notes/create", null, headers)();
-        history.push(`/detail/${note._id}`);
+        try {
+            const note = await postData("/notes/create", null, headers)(true);
+            history.push(`/detail/${note._id}`);
+        } catch (err) {
+            if ((err.status = 401)) {
+                auchContext.logout();
+            }
+        }
     };
 
     const changeHandler = (event) => {

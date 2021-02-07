@@ -18,6 +18,7 @@ export const usePostData = (formData, setLoadingStatus) => {
             } catch (err) {
                 setLoadingStatus(false);
                 showMessage(err);
+                throw err;
             }
         },
         [formData]
