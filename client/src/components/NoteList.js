@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import {useSnippet} from "../hooks/snippet.hook";
+import Snippet from "../components/Snippet";
 
 const Notes = ({ notes }) => {
     if (!notes.length) {
@@ -12,12 +12,12 @@ const Notes = ({ notes }) => {
                     <li key={note._id}>
                         <h3>
                             <Link to={`/detail/${note._id}`}>
-                                <span className="grey-text text-darken-4">
-                                    {useSnippet(note.title, 50)}
-                                </span>
+                                <span className="grey-text text-darken-4">{note.title}</span>
                             </Link>
                         </h3>
-                        <p>{note.text}</p>
+                        <p>
+                            <Snippet length="100">{note.text}</Snippet>
+                        </p>
                         <p>
                             <small className="grey-text text-darken-2">
                                 {new Date(note.date).toLocaleDateString()}
