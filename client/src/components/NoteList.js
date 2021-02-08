@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import {useSnippet} from "../hooks/snippet.hook";
 
 const Notes = ({ notes }) => {
     if (!notes.length) {
@@ -11,7 +12,9 @@ const Notes = ({ notes }) => {
                     <li key={note._id}>
                         <h3>
                             <Link to={`/detail/${note._id}`}>
-                                <span className="grey-text text-darken-4">{note.title}</span>
+                                <span className="grey-text text-darken-4">
+                                    {useSnippet(note.title, 50)}
+                                </span>
                             </Link>
                         </h3>
                         <p>{note.text}</p>
