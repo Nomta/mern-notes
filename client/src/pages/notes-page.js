@@ -18,10 +18,8 @@ const LinksPage = () => {
             setLoading(true);
             const notes = await request("/notes", "GET", null, headers);
             setNotes(notes);
-        } catch (err) {
-        } finally {
             setLoading(false);
-        }
+        } catch (err) {}
     }, [token, request]);
 
     useEffect(() => getNotes(), [getNotes]);

@@ -18,10 +18,8 @@ const DetailPage = () => {
             setLoading(true);
             const note = await request(`/notes/${id}`, "GET", null, headers);
             setNote(note);
-        } catch (err) {
-        } finally {
             setLoading(false);
-        }
+        } catch (err) {}
     }, [token, request, id]);
 
     useEffect(() => getNote(), [getNote]);

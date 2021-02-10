@@ -20,11 +20,7 @@ const CreatePage = () => {
         try {
             const note = await postData("/notes/create", null, headers)(true);
             history.push(`/detail/${note._id}`);
-        } catch (err) {
-            if ((err.status = 401)) {
-                auchContext.logout();
-            }
-        }
+        } catch (err) {}
     };
 
     const changeHandler = (event) => {
