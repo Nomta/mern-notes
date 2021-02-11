@@ -1,6 +1,4 @@
 import { useState, useContext, useCallback, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { usePostData } from "../hooks/postData.hook";
 import { AuthContext } from "../context/AuthContext";
 import { useHttp } from "../hooks/http.hook";
 import NoteList from "../components/NoteList";
@@ -22,6 +20,16 @@ const LinksPage = () => {
         } catch (err) {}
     }, [token, request]);
 
+    const deleteNote = useCallback(
+        async (_id) => {
+            try {
+                const { id } = await request(`/notes/${_id}`, "DELETE", null, headers);
+                setNotes(notes.filter((note) => note._id !== id));
+            } catch (err) {}
+        },
+        [token, request, notes]
+    );
+
     useEffect(() => getNotes(), [getNotes]);
 
     if (loading) {
@@ -31,7 +39,7 @@ const LinksPage = () => {
     return (
         <div>
             <h1>Notes Page</h1>
-            <NoteList notes={notes} />
+            <NoteList notes={notes} deleteNote={deleteNote} />
         </div>
     );
 };

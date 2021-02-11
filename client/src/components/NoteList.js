@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Snippet from "../components/Snippet";
 
-const Notes = ({ notes }) => {
+const Notes = ({ notes, deleteNote }) => {
     if (!notes.length) {
         return <p>No notes</p>;
     }
@@ -27,6 +27,11 @@ const Notes = ({ notes }) => {
                             <Link to={`/detail/${note._id}`}>
                                 <span className="grey-text text-darken-2">Read more...</span>
                             </Link>
+                            <a
+                                className="teal-text text-darken-2 right"
+                                onClick={() => deleteNote(note._id)}>
+                                Delete
+                            </a>
                         </p>
                     </li>
                 );

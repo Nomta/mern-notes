@@ -22,6 +22,22 @@ exports.getById = async function (req, res) {
     }
 };
 
+exports.delete = async function (req, res) {
+    try {
+        if (!isValidObjectId(req.params.id)) {
+            res.status(404).json({ message: "Not found" });
+        }
+        const note = await Note.findById(req.params.id);
+        const { id } = note;
+        await note.remove()
+        
+        res.json({ id });
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+};
+
 exports.post = async function (req, res) {
     try {
         const note = new Note({ user: req.user.userId, ...req.body });
