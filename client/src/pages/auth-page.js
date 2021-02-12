@@ -30,7 +30,7 @@ const AuthPage = () => {
     const loginHandler = postData("/auth/login", login);
 
     return (
-        <div className="auth-card grey lighten-2" style={{ height: "100%" }}>
+        <div className="auth-card grey lighten-2">
             <div className="container">
                 <div className="card white">
                     <div className="card-content">
