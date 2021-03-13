@@ -52,3 +52,13 @@ exports.post = async function (req, res) {
         res.status(500).json(err);
     }
 };
+
+exports.put = async function (req, res) {
+    try {
+        const note = await Note.findById(req.params.id);
+        await note.updateOne(req.body);
+        res.status(201).json(note);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+};

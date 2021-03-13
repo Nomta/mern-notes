@@ -7,11 +7,11 @@ export const usePostData = (formData, setLoadingStatus) => {
     const showMessage = useMessage();
 
     return useCallback(
-        (url, cb, headers) => async () => {
+        (url, cb, method = "POST", headers) => async () => {
             setLoadingStatus(true);
 
             try {
-                const data = await request(url, "POST", formData, headers);
+                const data = await request(url, method, formData, headers);
                 setLoadingStatus(false);
                 (cb || showMessage)(data);
                 return data;

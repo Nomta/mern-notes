@@ -27,11 +27,16 @@ const Notes = ({ notes, deleteNote }) => {
                             <Link to={`/detail/${note._id}`}>
                                 <span className="grey-text text-darken-2">Read more...</span>
                             </Link>
-                            <a
-                                className="teal-text text-darken-2 right"
-                                onClick={() => deleteNote(note._id)}>
-                                Delete
-                            </a>
+                            <span className="right">
+                                <Link to={`/edit/${note._id}`}>
+                                    <span className="note-link teal-text text-darken-2">Edit</span>
+                                </Link>
+                                <a
+                                    className="note-link teal-text text-darken-2"
+                                    onClick={() => deleteNote(note._id)}>
+                                    Delete
+                                </a>
+                            </span>
                         </p>
                     </li>
                 );

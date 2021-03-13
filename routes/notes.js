@@ -5,5 +5,6 @@ router.get("/", getUser, require("../controllers/notes").get);
 router.get("/:id", getUser, require("../controllers/notes").getById);
 router.delete("/:id", getUser, require("../controllers/notes").delete);
 router.post("/create", getUser, require("../controllers/notes").post);
+router.put("/edit/:id", getUser, require("../controllers/notes").put);
 
 module.exports = router;
