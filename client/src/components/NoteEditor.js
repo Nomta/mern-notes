@@ -1,10 +1,10 @@
-import { useState, useContext, useCallback } from "react";
+import { useState, useContext, useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { usePostData } from "../hooks/postData.hook";
 import { AuthContext } from "../context/AuthContext";
 
 const NoteEditor = ({ note, method, api }) => {
-    const [formData, setFormData] = useState(note);
+    const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false);
     const auchContext = useContext(AuthContext);
     const history = useHistory();
@@ -31,11 +31,16 @@ const NoteEditor = ({ note, method, api }) => {
     return (
         <form action="" onSubmit={submitHandler} className="card-content">
             <div className="input-field">
-                <input type="text" name="title" value={formData.title} onChange={changeHandler} />
+                <input
+                    type="text"
+                    name="title"
+                    defaultValue={note.title}
+                    onChange={changeHandler}
+                />
                 <label htmlFor="title">Title</label>
             </div>
             <div className="input-field">
-                <input type="text" name="text" value={formData.text} onChange={changeHandler} />
+                <input type="text" name="text" defaultValue={note.text} onChange={changeHandler} />
                 <label htmlFor="text">Text</label>
             </div>
             <div className="right-align">
